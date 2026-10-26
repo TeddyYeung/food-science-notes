@@ -1,0 +1,244 @@
+<title>김치 속 삼투압</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+/* Layout: one tall picture-book column, each "page" = big drawing + one sentence */
+:root {
+  --bg: #f7f9f2;
+  --paper: #ffffff;
+  --ink: #23301f;
+  --soft: #5d6b57;
+  --leaf: #7cb342;
+  --leaf-dark: #4f7f24;
+  --stem: #eef3d6;
+  --chili: #d84a2f;
+  --water: #3a8fd6;
+  --salt: #ffffff;
+  --salt-edge: #9aa5a0;
+  --line: #d9e2cf;
+  --display: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141a12; --paper: #1d251a; --ink: #eef3e6; --soft: #a9b8a2;
+    --leaf: #8fc75a; --leaf-dark: #6aa33a; --stem: #3a4630; --chili: #ef6a4c;
+    --water: #6cb2ef; --salt: #f4f6f2; --salt-edge: #7d8a83; --line: #2f3a2a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141a12; --paper: #1d251a; --ink: #eef3e6; --soft: #a9b8a2;
+  --leaf: #8fc75a; --leaf-dark: #6aa33a; --stem: #3a4630; --chili: #ef6a4c;
+  --water: #6cb2ef; --salt: #f4f6f2; --salt-edge: #7d8a83; --line: #2f3a2a;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body);
+  font-size: 1.05rem; line-height: 1.7;
+}
+.wrap {
+  max-width: 720px; margin: 0 auto;
+  padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 28px;
+}
+header { text-align: center; display: flex; flex-direction: column; gap: 6px; }
+.eyebrow { font-size: .85rem; letter-spacing: .08em; color: var(--soft); }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 7vw, 3rem); line-height: 1.2; margin: 0; text-wrap: balance; }
+h1 em { font-style: normal; color: var(--chili); }
+.page {
+  background: var(--paper); border: 2px solid var(--line); border-radius: 24px;
+  padding: 20px 20px 24px; display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center;
+}
+.page svg { width: 100%; max-width: 560px; height: auto; }
+.step { font-family: var(--display); color: var(--leaf-dark); font-size: 1rem; }
+h2 { font-family: var(--display); font-weight: 400; font-size: clamp(1.4rem, 5vw, 1.9rem); margin: 0; line-height: 1.3; text-wrap: balance; }
+p { margin: 0; max-width: 34em; color: var(--soft); }
+.big-rule {
+  font-family: var(--display); font-size: clamp(1.5rem, 6vw, 2.2rem); line-height: 1.35;
+  background: var(--water); color: var(--paper); border-radius: 20px; padding: 18px 22px; text-align: center; text-wrap: balance;
+}
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; }
+.grid3 figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.grid3 figcaption { font-family: var(--display); font-size: 1.05rem; color: var(--ink); }
+.grid3 small { color: var(--soft); font-size: .85rem; line-height: 1.4; }
+@media (max-width: 480px) { .grid3 { grid-template-columns: 1fr; } .grid3 svg { max-width: 220px; } }
+.finale { text-align: center; display: flex; flex-direction: column; gap: 8px; }
+.finale q { font-family: var(--display); font-size: clamp(1.4rem, 5.5vw, 2rem); quotes: "“" "”"; text-wrap: balance; }
+.source { text-align: center; font-size: .85rem; color: var(--soft); }
+.source a { color: var(--water); }
+svg text { font-family: var(--display); }
+.drip { animation: drip 2.4s ease-in infinite; }
+.drip.d2 { animation-delay: .8s; } .drip.d3 { animation-delay: 1.6s; }
+@keyframes drip { 0% { transform: translateY(0); opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(26px); opacity: 0; } }
+.hop { animation: hop 3s ease-in-out infinite; }
+@keyframes hop { 0%, 20% { transform: translateX(0); } 60%, 100% { transform: translateX(120px); } }
+@media (prefers-reduced-motion: reduce) { .drip, .hop { animation: none; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">5살도 아는 과학 · 김장 편</span>
+    <h1>배추에 소금 뿌리면<br><em>왜 물이 나올까?</em></h1>
+  </header>
+
+  <!-- 1. 질문 -->
+  <section class="page">
+    <svg viewBox="0 0 400 220" role="img" aria-label="소금을 뿌린 배추 잎에서 물방울이 떨어진다">
+      <path d="M200 30 C120 30 70 90 80 150 C88 195 150 205 200 205 C250 205 312 195 320 150 C330 90 280 30 200 30 Z" fill="var(--leaf)"/>
+      <path d="M200 60 C170 90 165 150 180 205 L220 205 C235 150 230 90 200 60 Z" fill="var(--stem)"/>
+      <path d="M200 70 L200 200 M200 110 L150 90 M200 140 L140 125 M200 110 L250 90 M200 140 L260 125" stroke="var(--leaf-dark)" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <g fill="var(--salt)" stroke="var(--salt-edge)" stroke-width="1.5">
+        <rect x="130" y="60" width="9" height="9" transform="rotate(20 134 64)"/>
+        <rect x="245" y="55" width="9" height="9" transform="rotate(-15 249 59)"/>
+        <rect x="160" y="40" width="8" height="8"/>
+        <rect x="270" y="95" width="8" height="8" transform="rotate(30 274 99)"/>
+        <rect x="115" y="110" width="8" height="8"/>
+        <rect x="225" y="40" width="7" height="7" transform="rotate(45 228 43)"/>
+      </g>
+      <g fill="var(--water)">
+        <path class="drip" d="M120 182 q6 10 0 14 q-6 -4 0 -14 Z"/>
+        <path class="drip d2" d="M200 196 q7 11 0 16 q-7 -5 0 -16 Z"/>
+        <path class="drip d3" d="M285 180 q6 10 0 14 q-6 -4 0 -14 Z"/>
+      </g>
+    </svg>
+    <h2>짜지도 않았고, 끓이지도 않았는데<br>물이 줄줄!</h2>
+    <p>배추가 슬퍼서 우는 것도 아니에요. 범인의 이름은 <b>삼투압</b>이에요.</p>
+  </section>
+
+  <!-- 2. 규칙 -->
+  <div class="big-rule">💧 물은 늘 <u>덜 짠 곳</u> → <u>더 짠 곳</u>으로 간다</div>
+
+  <!-- 3. 확대 -->
+  <section class="page">
+    <span class="step">돋보기로 보면</span>
+    <svg viewBox="0 0 400 210" role="img" aria-label="배추 세포 안은 물이 많고 덜 짜며, 밖은 소금이 많아 짜다">
+      <rect x="10" y="20" width="380" height="170" rx="20" fill="var(--bg)" stroke="var(--line)" stroke-width="2"/>
+      <rect x="40" y="45" width="170" height="120" rx="26" fill="var(--stem)" stroke="var(--leaf-dark)" stroke-width="5" stroke-dasharray="10 7"/>
+      <g fill="var(--water)">
+        <circle cx="75" cy="80" r="8"/><circle cx="110" cy="70" r="8"/><circle cx="150" cy="85" r="8"/><circle cx="180" cy="72" r="8"/>
+        <circle cx="70" cy="125" r="8"/><circle cx="105" cy="110" r="8"/><circle cx="140" cy="130" r="8"/><circle cx="180" cy="120" r="8"/>
+        <circle cx="90" cy="148" r="8"/><circle cx="160" cy="150" r="8"/>
+      </g>
+      <g fill="var(--salt)" stroke="var(--salt-edge)" stroke-width="1.5">
+        <rect x="128" y="100" width="12" height="12"/>
+      </g>
+      <g fill="var(--salt)" stroke="var(--salt-edge)" stroke-width="1.5">
+        <rect x="240" y="55" width="13" height="13"/><rect x="275" y="70" width="13" height="13"/><rect x="315" y="52" width="13" height="13"/><rect x="350" y="75" width="13" height="13"/>
+        <rect x="250" y="100" width="13" height="13"/><rect x="290" y="110" width="13" height="13"/><rect x="335" y="105" width="13" height="13"/>
+        <rect x="245" y="145" width="13" height="13"/><rect x="285" y="150" width="13" height="13"/><rect x="330" y="145" width="13" height="13"/><rect x="360" y="135" width="13" height="13"/>
+      </g>
+      <g fill="var(--water)"><circle cx="310" cy="85" r="7"/><circle cx="270" cy="128" r="7"/></g>
+      <text x="125" y="40" text-anchor="middle" font-size="16" fill="var(--ink)">세포 안: 물 많음, 안 짬</text>
+      <text x="305" y="40" text-anchor="middle" font-size="16" fill="var(--chili)">밖: 소금 잔뜩, 짬!</text>
+    </svg>
+    <h2>배추는 아주 작은 방(세포)들이 모인 거예요</h2>
+    <p>방 안(세포)은 물이 가득하고 싱거워요. 방 밖은 우리가 뿌린 소금 때문에 엄청 짜요.</p>
+  </section>
+
+  <!-- 4. 문지기 -->
+  <section class="page">
+    <span class="step">방 벽에는 문지기가 있어요</span>
+    <svg viewBox="0 0 400 200" role="img" aria-label="세포막 문지기가 물은 통과시키고 소금은 막는다">
+      <rect x="190" y="10" width="20" height="180" rx="8" fill="var(--leaf)"/>
+      <rect x="190" y="60" width="20" height="36" fill="var(--paper)"/>
+      <circle cx="200" cy="44" r="14" fill="var(--ink)"/>
+      <rect x="186" y="96" width="28" height="44" rx="8" fill="var(--ink)"/>
+      <rect x="170" y="62" width="10" height="6" fill="var(--paper)"/><rect x="220" y="62" width="10" height="6" fill="var(--paper)"/>
+      <g class="hop"><circle cx="60" cy="78" r="12" fill="var(--water)"/></g>
+      <text x="60" y="118" text-anchor="middle" font-size="15" fill="var(--water)">물: 쏙 통과</text>
+      <path d="M95 78 L175 78" stroke="var(--water)" stroke-width="3" stroke-dasharray="6 6" fill="none"/>
+      <rect x="268" y="135" width="26" height="26" fill="var(--salt)" stroke="var(--salt-edge)" stroke-width="2"/>
+      <path d="M255 125 L307 171 M307 125 L255 171" stroke="var(--chili)" stroke-width="5" stroke-linecap="round"/>
+      <text x="281" y="190" text-anchor="middle" font-size="15" fill="var(--chili)">소금: 덩치 커서 출입 금지</text>
+    </svg>
+    <h2>작은 물은 통과, 큰 소금은 “안 돼요!”</h2>
+    <p>이 깐깐한 벽을 <b>반투과성 막</b>이라고 불러요. 그래서 소금은 못 들어가고, 물만 밖으로 나갈 수 있어요.</p>
+  </section>
+
+  <!-- 5. 왜 -->
+  <section class="page">
+    <span class="step">그런데 물은 왜 굳이 나갈까?</span>
+    <svg viewBox="0 0 400 190" role="img" aria-label="물이 짠 쪽으로 가서 양쪽 짠맛을 비슷하게 맞춘다">
+      <path d="M60 150 L340 150" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M200 150 L180 180 L220 180 Z" fill="var(--soft)"/>
+      <rect x="70" y="95" width="80" height="55" rx="10" fill="var(--water)"/>
+      <text x="110" y="128" text-anchor="middle" font-size="16" fill="var(--paper)">싱거움</text>
+      <rect x="250" y="95" width="80" height="55" rx="10" fill="var(--chili)"/>
+      <text x="290" y="128" text-anchor="middle" font-size="16" fill="var(--paper)">짬</text>
+      <path d="M150 70 C190 30 230 30 260 70" stroke="var(--water)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M252 58 L262 72 L246 74" stroke="var(--water)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="205" y="28" text-anchor="middle" font-size="16" fill="var(--ink)">“저쪽 너무 짜네, 내가 가서 묽혀줄게!”</text>
+    </svg>
+    <h2>자연은 <span style="color:var(--water)">반반 똑같은 게</span> 좋아요</h2>
+    <p>물은 짠 쪽으로 가서 짠맛을 묽혀요. 양쪽을 비슷하게 맞추려고요. 누가 미는 게 아니라 저절로 퍼져요.</p>
+  </section>
+
+  <!-- 6. 결과 -->
+  <section class="page">
+    <span class="step">그래서 결과는</span>
+    <svg viewBox="0 0 400 180" role="img" aria-label="빳빳한 배추가 숨이 죽어 부드러워진다">
+      <g>
+        <path d="M100 20 C70 20 50 60 55 110 C58 150 80 165 100 165 C120 165 142 150 145 110 C150 60 130 20 100 20 Z" fill="var(--leaf)"/>
+        <path d="M100 40 L100 160" stroke="var(--leaf-dark)" stroke-width="3"/>
+        <text x="100" y="178" text-anchor="middle" font-size="15" fill="var(--ink)">빳빳</text>
+      </g>
+      <path d="M170 95 L225 95" stroke="var(--soft)" stroke-width="4" stroke-linecap="round"/>
+      <path d="M215 85 L228 95 L215 105" stroke="var(--soft)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="198" y="80" text-anchor="middle" font-size="13" fill="var(--water)">물 빠짐</text>
+      <g>
+        <path d="M255 150 C270 120 300 105 330 112 C360 118 372 140 362 158 C340 166 290 166 255 150 Z" fill="var(--leaf)"/>
+        <path d="M265 148 C290 132 320 125 355 145" stroke="var(--leaf-dark)" stroke-width="3" fill="none"/>
+        <text x="310" y="178" text-anchor="middle" font-size="15" fill="var(--ink)">흐물 (숨 죽음)</text>
+      </g>
+    </svg>
+    <h2>배추가 <span style="color:var(--chili)">“숨이 죽어요”</span></h2>
+    <p>물이 빠진 배추는 말랑해져요. 빈자리로 양념이 쏙쏙 스며들 준비가 끝난 거예요.</p>
+  </section>
+
+  <!-- 7. 다른 데서도 -->
+  <section class="page">
+    <span class="step">이거 김치에만 있는 게 아니에요</span>
+    <div class="grid3">
+      <figure>
+        <svg viewBox="0 0 120 120" role="img" aria-label="소금물에 담근 오이">
+          <rect x="25" y="30" width="70" height="80" rx="10" fill="var(--water)" opacity=".35"/>
+          <rect x="45" y="25" width="16" height="78" rx="8" fill="var(--leaf-dark)"/>
+          <rect x="65" y="35" width="14" height="68" rx="7" fill="var(--leaf)"/>
+        </svg>
+        <figcaption>오이 피클</figcaption>
+        <small>소금물에 담그기</small>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 120 120" role="img" aria-label="소금 뿌린 고기">
+          <path d="M25 70 C25 40 60 30 85 45 C105 58 100 92 70 95 C45 98 25 90 25 70 Z" fill="var(--chili)"/>
+          <ellipse cx="78" cy="62" rx="10" ry="8" fill="var(--paper)"/>
+          <g fill="var(--salt)" stroke="var(--salt-edge)"><rect x="40" y="55" width="6" height="6"/><rect x="55" y="45" width="6" height="6"/><rect x="50" y="75" width="6" height="6"/></g>
+        </svg>
+        <figcaption>고기 소금 절이기</figcaption>
+        <small>물 빼서 오래 보관</small>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 120 120" role="img" aria-label="설탕 뿌린 딸기에서 시럽이 생긴다">
+          <ellipse cx="60" cy="100" rx="42" ry="10" fill="var(--chili)" opacity=".35"/>
+          <path d="M60 95 C30 80 30 45 45 38 C52 35 68 35 75 38 C90 45 90 80 60 95 Z" fill="var(--chili)"/>
+          <path d="M45 38 L52 26 L60 36 L68 26 L75 38 Z" fill="var(--leaf)"/>
+          <g fill="var(--salt)" stroke="var(--salt-edge)"><rect x="50" y="52" width="5" height="5"/><rect x="65" y="60" width="5" height="5"/><rect x="55" y="72" width="5" height="5"/></g>
+        </svg>
+        <figcaption>딸기 + 설탕</figcaption>
+        <small>달콤한 시럽이 생김</small>
+      </figure>
+    </div>
+    <p>소금이든 설탕이든, 바깥이 더 진하면 물이 밖으로 나와요.</p>
+  </section>
+
+  <section class="finale">
+    <span class="eyebrow">한 문장 요약</span>
+    <q>삼투압은 물이 벽을 넘어 균형을 찾아가는 여행</q>
+    <p style="margin:0 auto">다음에 김치를 먹을 때, 그 아삭함 속 작은 여행을 떠올려 보세요.</p>
+  </section>
+
+  <p class="source">출처: <a href="https://youtu.be/hUfKdDW4Wpw" target="_blank" rel="noopener">Beyond Words · 김치에 숨은 과학, ‘삼투압’ 5분만에 이해하기</a></p>
+</div>

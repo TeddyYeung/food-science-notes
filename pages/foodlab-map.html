@@ -1,0 +1,264 @@
+<title>푸드랩 무료 지도</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: lab notebook — stat strip, starter shelf, then a filterable index of principle-first items */
+:root {
+  --bg: #f6f7f1;
+  --paper: #ffffff;
+  --ink: #1f2a22;
+  --soft: #5b675d;
+  --line: #dbe1d6;
+  --accent: #c2462b;
+  --video: #c2462b;
+  --article: #2e6fa8;
+  --chip: #edf0e8;
+  --display: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131813; --paper: #1b211c; --ink: #e9efe7; --soft: #a3b0a4; --line: #2c352d;
+    --accent: #f07a5c; --video: #f07a5c; --article: #6eaee6; --chip: #242c25; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131813; --paper: #1b211c; --ink: #e9efe7; --soft: #a3b0a4; --line: #2c352d;
+  --accent: #f07a5c; --video: #f07a5c; --article: #6eaee6; --chip: #242c25; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 1rem; line-height: 1.65; }
+.wrap {
+  max-width: 880px; margin: 0 auto; padding-block: 36px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 32px;
+}
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.2; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; margin: 0; }
+.lede { margin: 6px 0 0; color: var(--soft); max-width: 40em; }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.stat { border-top: 3px solid var(--ink); padding-top: 8px; }
+.stat b { display: block; font-family: var(--mono); font-size: 1.6rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--soft); font-size: .9rem; }
+.starter { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.starter a { background: var(--paper); border: 2px solid var(--ink); border-radius: 14px; padding: 14px 16px; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.starter a:hover, .starter a:focus-visible { border-color: var(--accent); outline: none; }
+.starter .n { font-family: var(--mono); color: var(--accent); font-size: .85rem; }
+.starter .t { font-family: var(--display); font-size: 1.15rem; line-height: 1.3; }
+.starter .why { color: var(--soft); font-size: .9rem; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filters button { font: inherit; font-size: .92rem; border: 1.5px solid var(--line); background: var(--chip); color: var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.filters button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.types { display: flex; gap: 8px; flex-wrap: wrap; }
+.cat { display: flex; flex-direction: column; gap: 8px; }
+.cat h3 { font-family: var(--display); font-weight: 400; font-size: 1.25rem; margin: 0; display: flex; gap: 8px; align-items: baseline; }
+.cat h3 small { font-family: var(--mono); color: var(--soft); font-size: .8rem; }
+.cat .hint { margin: 0; color: var(--soft); font-size: .9rem; }
+ul.items { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+ul.items li { border-bottom: 1px solid var(--line); }
+ul.items a { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; padding: 10px 2px; text-decoration: none; color: var(--ink); }
+ul.items a:hover .ko, ul.items a:focus-visible .ko { color: var(--accent); }
+ul.items a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.badge { font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; text-align: center; border-radius: 6px; padding: 1px 0; }
+.badge.v { color: var(--video); border: 1.5px solid var(--video); }
+.badge.a { color: var(--article); border: 1.5px solid var(--article); }
+.ko { font-size: 1rem; display: block; }
+.en { font-size: .8rem; color: var(--soft); display: block; overflow-wrap: anywhere; }
+.dur { font-family: var(--mono); font-size: .8rem; color: var(--soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.empty { color: var(--soft); }
+.notes { font-size: .88rem; color: var(--soft); border-top: 1px solid var(--line); padding-top: 14px; display: flex; flex-direction: column; gap: 4px; }
+.notes p { margin: 0; }
+.notes a { color: var(--article); }
+@media (max-width: 480px) { .stats { grid-template-columns: 1fr 1fr 1fr; } .stat b { font-size: 1.25rem; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>푸드랩, 책 없이 보기</h1>
+    <p class="lede">켄지 로페즈-알트의 유튜브 영상과 Serious Eats 칼럼 목록을 전부 확인했어요. 그중 “왜 이렇게 하나”를 설명하는 것만 골라 주제별로 묶었어요. 모두 무료예요.</p>
+  </header>
+
+  <section class="stats" aria-label="확인한 범위">
+    <div class="stat"><b>638</b><span>유튜브 영상 전체</span></div>
+    <div class="stat"><b>353</b><span>Food Lab 칼럼 글</span></div>
+    <div class="stat"><b id="picked">0</b><span>원리 위주로 고른 것</span></div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <h2>처음이면 이 5개부터</h2>
+    <div class="starter" id="starter"></div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:16px">
+    <h2>주제별 목록</h2>
+    <div class="filters" id="cats" role="group" aria-label="주제 고르기"></div>
+    <div class="filters types" id="types" role="group" aria-label="형태 고르기"></div>
+    <div id="list" style="display:flex;flex-direction:column;gap:28px"></div>
+  </section>
+
+  <footer class="notes">
+    <p>영상과 글은 영어예요. 유튜브는 자막 → 자동 번역 → 한국어로 볼 수 있어요.</p>
+    <p>한국어 제목과 설명은 원제목을 보고 붙였어요. 영상 내용을 하나하나 보고 쓴 것은 아니에요.</p>
+    <p>나머지는 대부분 레시피 영상이에요. 전체 목록: <a href="https://www.youtube.com/@JKenjiLopezAlt/videos" target="_blank" rel="noopener">유튜브 채널</a> · <a href="https://www.seriouseats.com/the-food-lab-5118015" target="_blank" rel="noopener">Food Lab 칼럼</a></p>
+  </footer>
+</div>
+
+<script>
+const CATS = {
+  salt:   ["소금·간", "소금을 언제, 얼마나, 어떤 걸 넣는지"],
+  veg:    ["채소·수분", "김치 절이기와 같은 삼투압, 채소 물기 다루기"],
+  stir:   ["볶음·웍", "볶음이 물러지지 않는 법, 센 불의 원리"],
+  crisp:  ["튀김·바삭함", "겉은 바삭, 속은 촉촉의 원리"],
+  meat:   ["고기·스테이크", "굽기, 레스팅, 열과 온도"],
+  egg:    ["달걀", "삶기, 굽기, 스크램블의 차이"],
+  pasta:  ["파스타·소스·유화", "물과 기름이 섞이는 원리"],
+  myth:   ["속설·Q&A", "흔히 믿는 요리 상식 검증"],
+  bake:   ["베이킹·반죽", "반죽, 발효, 부풀리기"],
+  tools:  ["칼질·도구", "칼, 팬, 웍 고르고 쓰기"]
+};
+// [type v/a, cat, 한국어, 원제, id(영상)/slug(글), 길이]
+const ITEMS = [
+  ["v","salt","소금 제대로 쓰기: 코셔 소금, 꽃소금 차이","How to Use Salt Right: Kosher, Table, and Beyond","yprH4DRHI0c","4:02"],
+  ["v","salt","스테이크 소금은 언제 뿌려야 하나","When Should I Salt my Steak?","DtCqblM6Syg","21:53"],
+  ["v","salt","달걀 소금은 언제 넣어야 하나","When Should I Salt my Eggs? | Ask Kenji","SZ6L1PVRjIk","10:17"],
+  ["a","salt","코셔 소금이 꼭 필요한가","Do I Need to Use Kosher Salt?","ask-the-food-lab-do-i-need-to-use-kosher-salt"],
+  ["a","salt","다진 고기에 소금 넣는 타이밍","Salting Ground Beef | The Burger Lab","the-burger-lab-salting-ground-beef"],
+  ["a","salt","칠면조 염지(소금물 절이기)의 진실","The Right Way to Brine Turkey","the-food-lab-the-truth-about-brining-turkey-thanksgiving"],
+  ["a","salt","옥수수도 소금물에 절여야 하나","Should I Brine My Corn?","ask-the-food-lab-should-i-brine-my-corn"],
+
+  ["v","veg","마리네이드(절임)의 과학: 세비체","Ceviche and the Science of Marinating Fish","GDH6Xyzi_2Q","13:05"],
+  ["a","veg","세비체와 마리네이드의 과학 (글)","Ceviche And The Science Of Marinades","the-food-lab-ceviche-and-the-science-of-marin"],
+  ["v","veg","일본식 감자샐러드의 과학","The Science of Japanese Potato Salad","8o2NWYiLN8I","22:38"],
+  ["v","veg","양배추 코울슬로 제대로 만들기","How to Make the Best Cole Slaw","7Me9AbpaPC0","10:48"],
+  ["a","veg","가을·겨울 채소 굽는 법","How to Roast Fall and Winter Vegetables","the-food-lab-how-to-roast-vegetables"],
+  ["a","veg","냉동 데치기: 얼려서 채소 식감 바꾸기","How to Cryo-Blanch Vegetables","how-to-cryo-blanch-vegetables-green-beans"],
+  ["a","veg","봄 채소 데치는 법","How to Prepare Green Spring Produce","food-lab-spring-produce-how-to-blanch"],
+  ["a","veg","전자레인지로 채소 찌기","How to Steam Vegetables in the Microwave","how-to-steam-vegetables-in-the-microwave"],
+  ["a","veg","찌개 전에 채소를 꼭 볶아야 하나","Do I Need To Sauté Vegetables When Starting a Stew?","ask-the-food-lab-do-i-need-to-saute-vegetables-when-starting-a-stew"],
+  ["a","veg","마늘이 초록색으로 변하는 이유","Why Does My Garlic Turn Green?","ask-the-food-lab-why-does-my-garlic-turn-green"],
+  ["a","veg","마늘 맛을 끌어내는 법","On Developing Garlic Flavor","ask-the-food-lab-on-developing-garlic-flavor"],
+  ["v","veg","시판 다진 마늘, 먹을 만한가","Taste Test: Are Pre-Chopped Garlics Any Good?","vG-NsFXNYUw","15:05"],
+
+  ["v","stir","달걀볶음밥 3가지: 업소용 화구, 가정용, 웍 없이","Egg Fried Rice Three Ways","u2MJzEuI0vI","16:42"],
+  ["v","stir","화력이 세다고 볶음이 맛있진 않다","The Best Wok Burner (More BTUs ≠ Better Stir-Fries)","cpoSvprBJpE","8:04"],
+  ["v","stir","볶기 전에 고기를 씻는 이유","Why I Wash my Meat Before Stir-Frying","SGP36xcUnOs","8:03"],
+  ["v","stir","웍에서 요리 3개 연달아 볶기","How to Stir-Fry Three Dishes in a Row","uYJCOI1fJQY","14:51"],
+  ["v","stir","웍 질문 전부 답하기","I Answer All Your Wok Questions","bXwLmZBa0Lo","45:41"],
+  ["a","stir","웍 기술: 마른 볶음(건편)","Wok Skills 101: Dry-Frying","wok-skills-102-how-to-dry-fry-in-a-wok"],
+  ["a","stir","전기레인지로도 볶음이 되나","Can I Stir-Fry On An Electric Cooktop?","ask-the-food-lab-can-i-stir-fry-on-an-electric-cooktop"],
+  ["a","stir","가장 좋은 볶음은 그릴에서","For the Best Stir-Fry, Fire Up the Grill","the-food-lab-for-the-best-stir-fry-fire-up-the-grill"],
+  ["a","stir","부드러운 닭고기 볶음(벨벳팅)","Stir-Fried Velvet Chicken with Snap Peas","the-food-lab-stir-fried-velvet-chicken-with-s"],
+
+  ["v","crisp","인생 감자구이 (조회수 680만)","The Food Lab: How to Roast the Best Potatoes of Your Life","argKpeiKFfo","3:37"],
+  ["v","crisp","오븐으로 바삭한 닭날개","Extra Crispy Baked Wings","mh2AXh1eRmE","23:36"],
+  ["v","crisp","가장 바삭한 프라이드치킨","The Crispiest Fried Chicken","n5nKYqvu29w","30:35"],
+  ["v","crisp","두 번 튀긴 가라아게","Extra-Crispy Double-Fried Chicken Karaage","JbOAp_akVbs","14:36"],
+  ["a","crisp","튀김옷과 빵가루의 기본","Batter and Breading Basics for Frying","the-food-lab-batter-breading-deep-fry"],
+  ["a","crisp","감자튀김을 두 번 튀기는 이유","Why Double Fry French Fries?","the-burger-lab-why-double-fry-french-fries"],
+  ["a","crisp","어떤 치킨이든 더 맛있게 하는 비결 4가지","Four Secrets to Improving Any Fried Chicken Recipe","four-secrets-for-better-fried-chicken"],
+  ["a","crisp","튀김 기름은 몇 번 다시 쓸 수 있나","How Many Times Can I Re-Use Fry Oil?","ask-the-food-lab-how-many-times-can-i-reuse-fry-oil"],
+  ["a","crisp","젤라틴으로 튀김 기름 깨끗하게 하기","Cleaning Deep-Fry Oil Using Gelatin","clean-cooking-oil-with-gelatin-technique"],
+  ["a","crisp","만두를 더 바삭하게","How Can I Get My Dumplings Extra Crispy?","ask-the-food-lab-how-can-i-get-my-dumplings-e"],
+
+  ["v","meat","스테이크 굽기의 정석: 리버스 시어","The Best Way to Cook Steak: The Reverse Sear","pO8TUuSv7HA","13:15"],
+  ["v","meat","1인칭 시점 스테이크 굽기","POV How to Cook a Steak","INiAM1u925E","30:35"],
+  ["a","meat","스테이크에 관한 잘못된 속설 7가지","7 Myths About Cooking Steak That Need to Go Away","old-wives-tales-about-cooking-steak"],
+  ["a","meat","열과 온도는 다르다","The Science of Heat vs. Temperature","the-food-lab-fundamentals-science-of-heat-versus-temperature"],
+  ["a","meat","고기 레스팅(쉬게 두기)의 진실","The Food Lab on Resting Meat","how-to-have-juicy-meats-steaks-the-food-lab-the-importance-of-resting-grilling"],
+  ["a","meat","스테이크는 여러 번 뒤집는 게 낫다","Flip Your Steaks Multiple Times for Better Results","the-food-lab-flip-your-steaks-and-burgers-multiple-times-for-better-results"],
+  ["a","meat","결 반대로 썰어야 하는 이유","Slicing Meat Against the Grain","why-should-you-cut-meat-steak-against-the-grain"],
+  ["a","meat","뼈가 정말 고기 맛을 더하나","Do Bones Add Flavor to Meat?","ask-the-food-lab-do-bones-add-flavor-to-meat-beef"],
+  ["a","meat","호일 덮어 레스팅하면 망하나","Does Resting Under Foil Ruin Meat?","ask-the-food-lab-does-resting-under-foil-ruin-meat"],
+  ["a","meat","얼마나 뜨거워야 너무 뜨거운가 (애덤 새비지와 실험)","How Hot Is Too Hot? Adam Savage and The Food Lab","how-hot-is-too-hot-steak-searing-adam-savage-tested"],
+  ["a","meat","찜 요리에 물은 얼마나","How Much Liquid Should I Use When Braising?","ask-the-food-lab-how-much-liquid-braising"],
+
+  ["v","egg","완벽한 삶은 달걀","Perfect Boiled Eggs","hb0Elaa6gxY","11:56"],
+  ["v","egg","달걀프라이 4가지 방법","Four Ways to Fry Eggs","bTJaztklvew","19:33"],
+  ["v","egg","제대로 된 스크램블드 에그","Really Good Scrambled Eggs","CXTnq7srJRs","11:00"],
+  ["v","egg","실패 없는 수란","Truly Foolproof Poached Eggs","S60GxA9JpLk","4:42"],
+  ["v","egg","달걀 깨는 가장 좋은 방법","What's the Best Way to Crack Eggs?","8EN8leHe0uY","4:02"],
+  ["a","egg","잘 까지는 삶은 달걀의 비밀","How to Make Perfect Hard-Boiled Eggs","the-secrets-to-peeling-hard-boiled-eggs"],
+  ["a","egg","비싼 달걀이 정말 더 맛있나","Do 'Better' Eggs Really Taste Better?","what-are-the-best-eggs"],
+
+  ["v","pasta","카치오 에 페페 (치즈가 뭉치지 않는 원리)","Food Lab Basics: POV Cacio e Pepe","P6QWoOQMvE8","12:49"],
+  ["v","pasta","마요네즈 만들기","How to Make Mayonnaise","9TnIeYc2CWU","7:01"],
+  ["a","pasta","푸드랩 영상 시리즈: 유화","The Food Lab Video Series: Emulsions","food-lab-video-episode-3-emulsions"],
+  ["a","pasta","비네그레트는 왜 쓰나","What's the Point of a Vinaigrette?","salad-dressings-vinaigrettes-the-food-lab"],
+  ["a","pasta","파스타를 찬물에서 시작해도 되나","Can I Start Pasta In Cold Water?","ask-the-food-lab-can-i-start-pasta-in-cold-water"],
+  ["a","pasta","파스타 삶는 새로운 방법","A New Way to Cook Pasta?","how-to-cook-pasta-salt-water-boiling-tips-the-food-lab"],
+  ["a","pasta","국수 국물이 하룻밤 새 걸쭉해지는 이유","Why Does My Noodle Soup Thicken As It Sits Overnight?","ask-the-food-lab-noodle-soup"],
+  ["a","pasta","와인은 따로 졸여야 하나","Do I Really Need To Reduce Wine Separately?","ask-the-food-lab-do-i-really-need-to-reduce-w"],
+
+  ["a","myth","요리 속설 6가지","The Food Lab's Top 6 Food Myths","the-food-labs-top-food-myths"],
+  ["a","myth","질문 164개에 답하기","You Asked The Food Lab 164 Questions","the-food-lab-answers-questions-about-food-science"],
+  ["a","myth","MSG는 정말 몸에 나쁜가","Is MSG Actually Bad for You?","ask-the-food-lab-the-truth-about-msg"],
+  ["a","myth","맥도날드 버거가 썩지 않는 이유","Here's Why McDonald's Burgers Don't Rot","the-food-lab-why-mcdonalds-burgers-never-rot"],
+  ["a","myth","기름을 걷어내면 매운맛이 줄까","Can I Remove Spiciness by Removing Fat?","ask-the-food-lab-can-i-remove-heat-by-removing-fat"],
+  ["a","myth","월계수 잎은 무슨 역할을 하나","What's the Point of Bay Leaves?","ask-the-food-lab-whats-the-point-of-bay-leaves"],
+  ["a","myth","유통기한 표시의 진짜 뜻","What “Sell By,” “Best By,” and “Use By” Really Mean","sell-by-best-by-use-by-food-labels-11926053"],
+  ["a","myth","냉장고 정리로 음식 오래 보관하기","How to Organize Your Refrigerator","how-to-organize-refrigerator-efficient-safe-food-storage"],
+  ["v","myth","음식 얼리고 녹이는 가장 좋은 방법","The Best Way to Freeze and Defrost Food","iP1ihDLKoV0","3:55"],
+
+  ["a","bake","베이킹파우더와 베이킹소다 차이","What's the Difference Between Baking Powder and Baking Soda?","what-is-the-difference-between-baking-powder-and-baking-soda-in-pancakes"],
+  ["a","bake","과학으로 굽는 애플파이","Use Science to Bake the Best Apple Pie","the-food-lab-redux-science-apple-pie-thanksgiving"],
+  ["a","bake","푸드랩 초코칩 쿠키","The Food Lab's Chocolate Chip Cookies","the-food-lab-best-chocolate-chip-cookie-recipe"],
+  ["a","bake","피자 반죽은 냉장 발효 얼마나","How Long Should I Let My Pizza Dough Cold Ferment?","the-pizza-lab-how-long-should-i-let-my-dough-cold-ferment"],
+  ["a","bake","알아 둘 피자 반죽 3가지","The Pizza Lab: Three Doughs to Know","the-pizza-lab-three-doughs-to-know"],
+  ["v","bake","반죽 없이 만드는 팬 피자","Food Lab Basics: POV Foolproof No Knead Pan Pizza","HukqEjCPkhU","32:15"],
+
+  ["v","tools","수학적으로 가장 좋은 양파 써는 법","The Mathematically Best Way to Cut an Onion","rkMldsRcx0E","13:37"],
+  ["v","tools","숫돌로 칼 가는 법","How to Sharpen a Knife with a Whetstone","ixCnCvDUKQ8","14:47"],
+  ["v","tools","웍 길들이기","How to Season a Wok","3kdkPUmrc20","9:34"],
+  ["v","tools","논스틱 팬 비교: 테플론, 무쇠, 티타늄","Non-stick Pan Comparison","aXmKAsE3_Ec","30:59"],
+  ["a","tools","주방 도구 TOP 10","Our Top 10 Pieces of Kitchen Equipment","the-ten-best-kitchen-tools-gadgets-gear"],
+  ["a","tools","그릴팬은 정말 그릴 맛을 내나","Do Grill Pans Actually Mimic Grilling?","ask-the-food-lab-do-grill-pans-actually-mimic-grilling"]
+];
+const STARTER = [
+  ["v","7Me9AbpaPC0","양배추 코울슬로","김치 절이기와 같은 재료(양배추)로 비교해 보기 좋아요"],
+  ["v","u2MJzEuI0vI","달걀볶음밥 3가지","볶음에 물이 고이는 문제를 화구별로 비교해요"],
+  ["v","yprH4DRHI0c","소금 제대로 쓰기","4분짜리라 가볍게 시작하기 좋아요"],
+  ["v","argKpeiKFfo","인생 감자구이","채널에서 가장 많이 본 영상이에요 (3분 37초)"],
+  ["a","old-wives-tales-about-cooking-steak","스테이크 속설 7가지","푸드랩식 “실험으로 속설 깨기”를 맛보기 좋아요"]
+];
+const href = (t, id) => t === "v" ? "https://www.youtube.com/watch?v=" + id : "https://www.seriouseats.com/" + id;
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+document.getElementById("picked").textContent = ITEMS.length;
+document.getElementById("starter").innerHTML = STARTER.map((s, i) =>
+  `<a href="${href(s[0], s[1])}" target="_blank" rel="noopener"><span class="n">${i + 1} · ${s[0] === "v" ? "영상" : "글"}</span><span class="t">${esc(s[2])}</span><span class="why">${esc(s[3])}</span></a>`).join("");
+
+let cat = "all", type = "all";
+try { cat = localStorage.getItem("fl-cat") || "all"; type = localStorage.getItem("fl-type") || "all"; } catch (e) {}
+if (cat !== "all" && !CATS[cat]) cat = "all";
+
+function chips() {
+  const c = [["all", "전체"]].concat(Object.entries(CATS).map(([k, v]) => [k, v[0]]));
+  document.getElementById("cats").innerHTML = c.map(([k, l]) => `<button type="button" id="cat-${k}" data-c="${k}" aria-pressed="${k === cat}">${l}</button>`).join("");
+  const t = [["all", "영상+글"], ["v", "영상만"], ["a", "글만"]];
+  document.getElementById("types").innerHTML = t.map(([k, l]) => `<button type="button" id="type-${k}" data-t="${k}" aria-pressed="${k === type}">${l}</button>`).join("");
+}
+function render() {
+  const keys = cat === "all" ? Object.keys(CATS) : [cat];
+  const html = keys.map(k => {
+    const rows = ITEMS.filter(r => r[1] === k && (type === "all" || r[0] === type));
+    if (!rows.length) return "";
+    return `<div class="cat"><h3>${CATS[k][0]} <small>${rows.length}</small></h3><p class="hint">${CATS[k][1]}</p><ul class="items">` +
+      rows.map(r => `<li><a href="${href(r[0], r[4])}" target="_blank" rel="noopener"><span class="badge ${r[0]}">${r[0] === "v" ? "영상" : "글"}</span><span><span class="ko">${esc(r[2])}</span><span class="en">${esc(r[3])}</span></span><span class="dur">${r[5] || ""}</span></a></li>`).join("") +
+      `</ul></div>`;
+  }).join("");
+  document.getElementById("list").innerHTML = html || `<p class="empty">이 조건에 맞는 항목이 없어요.</p>`;
+}
+document.getElementById("cats").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  cat = b.dataset.c; try { localStorage.setItem("fl-cat", cat); } catch (x) {}
+  chips(); render();
+});
+document.getElementById("types").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  type = b.dataset.t; try { localStorage.setItem("fl-type", type); } catch (x) {}
+  chips(); render();
+});
+chips(); render();
+</script>
