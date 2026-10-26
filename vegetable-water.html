@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>채소는 거의 물</title>
+<meta name="description" content="채소에 물이 얼마나 들어 있는지, 요리마다 물을 얼마나 빼는지, 볶음이 왜 물러지는지 그림으로 설명해요.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.bars { width: 100%; display: flex; flex-direction: column; gap: 6px; text-align: left; }
+.bar-row { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 10px; align-items: center; }
+.bar-row .name { font-family: var(--display); font-size: 1rem; text-align: right; }
+.track {
+  position: relative; height: 22px;
+  background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
+  background-size: 25% 100%;
+}
+.fill {
+  height: 100%; background: var(--water); border-radius: 0 4px 4px 0;
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 6px;
+}
+.fill span { font-family: var(--mono); font-size: .78rem; color: var(--paper); font-variant-numeric: tabular-nums; }
+.bar-row:hover .fill, .bar-row:focus-within .fill { filter: brightness(1.12); }
+.axis { display: grid; grid-template-columns: 4.2em minmax(0, 1fr); gap: 10px; }
+.axis div { display: flex; justify-content: space-between; font-family: var(--mono); font-size: .72rem; color: var(--soft); }
+.tips { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%; text-align: left; }
+.tips li { border: 2px solid var(--line); border-radius: 16px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.tips b { font-family: var(--display); font-weight: 400; font-size: 1.05rem; }
+.tips span { color: var(--soft); font-size: .92rem; line-height: 1.5; }
+@media (max-width: 480px) { .tips { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav"><a href="./">← 목차</a><span class="no">03 / 05</span></nav>
+
+  <header class="hero">
+    <span class="eyebrow">5살도 아는 과학 · 채소 편</span>
+    <h1>채소는 사실 <em>거의 물</em>이에요</h1>
+  </header>
+
+  <section class="page">
+    <span class="step">채소 100g 안에 물이 몇 g?</span>
+    <div class="bars" role="img" aria-label="채소별 수분 비율: 오이, 상추, 배추 약 95%, 토마토, 애호박 약 94%, 시금치 91%, 양파 89%, 당근 88%, 감자 79%, 마늘 59%">
+      <div class="bar-row" title="오이: 약 95%"><span class="name">오이</span><div class="track"><div class="fill" style="width:95%"><span>95</span></div></div></div>
+      <div class="bar-row" title="상추: 약 95%"><span class="name">상추</span><div class="track"><div class="fill" style="width:95%"><span>95</span></div></div></div>
+      <div class="bar-row" title="배추: 약 95%"><span class="name">배추</span><div class="track"><div class="fill" style="width:95%"><span>95</span></div></div></div>
+      <div class="bar-row" title="토마토: 약 94%"><span class="name">토마토</span><div class="track"><div class="fill" style="width:94%"><span>94</span></div></div></div>
+      <div class="bar-row" title="애호박: 약 94%"><span class="name">애호박</span><div class="track"><div class="fill" style="width:94%"><span>94</span></div></div></div>
+      <div class="bar-row" title="시금치: 약 91%"><span class="name">시금치</span><div class="track"><div class="fill" style="width:91%"><span>91</span></div></div></div>
+      <div class="bar-row" title="양파: 약 89%"><span class="name">양파</span><div class="track"><div class="fill" style="width:89%"><span>89</span></div></div></div>
+      <div class="bar-row" title="당근: 약 88%"><span class="name">당근</span><div class="track"><div class="fill" style="width:88%"><span>88</span></div></div></div>
+      <div class="bar-row" title="감자: 약 79%"><span class="name">감자</span><div class="track"><div class="fill" style="width:79%"><span>79</span></div></div></div>
+      <div class="bar-row" title="마늘: 약 59%"><span class="name">마늘</span><div class="track"><div class="fill" style="width:59%"><span>59</span></div></div></div>
+      <div class="axis" aria-hidden="true"><span></span><div><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div></div>
+    </div>
+    <h2>배추 1kg 중 950g이 물이에요</h2>
+    <p>대부분의 채소는 무게의 80~95%가 물이에요. 그래서 소금을 뿌리거나 불에 올리면 물이 많이 나와요. 숫자는 대략적인 값이에요.</p>
+  </section>
+
+  <div class="big-rule">물을 뺄지 말지는 “이 물이 요리를 망치나?”로 정해요</div>
+
+  <section class="page">
+    <span class="step">요리마다 달라요</span>
+    <div class="grid2">
+      <figure>
+        <svg viewBox="0 0 140 110" role="img" aria-label="김치: 물을 많이 뺀다">
+          <rect x="20" y="30" width="100" height="70" rx="12" fill="var(--chili)" opacity=".25"/>
+          <path d="M35 80 C40 50 60 40 70 40 C80 40 100 50 105 80 Z" fill="var(--chili)"/>
+          <path d="M45 78 C55 60 85 60 95 78" stroke="var(--stem)" stroke-width="5" fill="none"/>
+          <g fill="var(--water)"><path class="drip" d="M30 96 q5 8 0 11 q-5 -3 0 -11 Z"/><path class="drip d2" d="M110 96 q5 8 0 11 q-5 -3 0 -11 Z"/></g>
+          <text x="70" y="22" text-anchor="middle" font-size="15" fill="var(--ink)">물 많이 빼기</text>
+        </svg>
+        <figcaption>김치</figcaption>
+        <small>물이 남으면 양념이 묽어지고 싱거워요</small>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 140 110" role="img" aria-label="오이무침: 물을 조금 뺀다">
+          <ellipse cx="70" cy="80" rx="52" ry="20" fill="var(--line)"/>
+          <g fill="var(--leaf)"><circle cx="50" cy="74" r="11"/><circle cx="72" cy="70" r="11"/><circle cx="92" cy="76" r="11"/><circle cx="62" cy="86" r="11"/><circle cx="84" cy="88" r="11"/></g>
+          <g fill="var(--stem)"><circle cx="50" cy="74" r="6"/><circle cx="72" cy="70" r="6"/><circle cx="92" cy="76" r="6"/><circle cx="62" cy="86" r="6"/><circle cx="84" cy="88" r="6"/></g>
+          <text x="70" y="22" text-anchor="middle" font-size="15" fill="var(--ink)">물 조금 빼기</text>
+        </svg>
+        <figcaption>오이무침</figcaption>
+        <small>안 빼면 무친 뒤에 물이 흥건해져요</small>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 140 110" role="img" aria-label="샐러드: 물을 빼지 않는다">
+          <path d="M20 60 L120 60 C118 90 98 102 70 102 C42 102 22 90 20 60 Z" fill="var(--line)"/>
+          <path d="M30 60 C30 40 50 34 58 46 C62 30 86 30 88 46 C96 36 114 44 110 60 Z" fill="var(--leaf)"/>
+          <circle cx="56" cy="56" r="8" fill="var(--chili)"/>
+          <text x="70" y="22" text-anchor="middle" font-size="15" fill="var(--ink)">빼지 않기</text>
+        </svg>
+        <figcaption>샐러드</figcaption>
+        <small>아삭함이 맛이에요. 드레싱은 먹기 직전에</small>
+      </figure>
+      <figure>
+        <svg viewBox="0 0 140 110" role="img" aria-label="볶음: 센 불로 물을 날린다">
+          <path class="steam" d="M55 50 q6 -8 0 -16 q-6 -8 0 -16" stroke="var(--soft)" stroke-width="3" fill="none"/>
+          <path class="steam s2" d="M80 50 q6 -8 0 -16 q-6 -8 0 -16" stroke="var(--soft)" stroke-width="3" fill="none"/>
+          <path d="M20 62 L110 62 C108 82 92 92 65 92 C38 92 22 82 20 62 Z" fill="var(--ink)"/>
+          <rect x="108" y="64" width="28" height="7" rx="3" fill="var(--ink)"/>
+          <path d="M40 62 C48 54 58 66 66 58 C74 52 84 64 92 58" stroke="var(--leaf)" stroke-width="7" fill="none" stroke-linecap="round"/>
+          <path d="M40 104 q10 -12 25 0 q15 -12 25 0" stroke="var(--chili)" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <text x="70" y="14" text-anchor="middle" font-size="15" fill="var(--ink)">불로 날리기</text>
+        </svg>
+        <figcaption>볶음</figcaption>
+        <small>센 불로 물을 바로 날려 보내요</small>
+      </figure>
+    </div>
+  </section>
+
+  <section class="page">
+    <span class="step">볶을 때도 물이 나와요</span>
+    <svg viewBox="0 0 400 210" role="img" aria-label="채소를 많이 넣은 미지근한 팬은 물이 고여 삶아지고, 뜨거운 팬은 물이 바로 날아가 볶아진다">
+      <g>
+        <path d="M20 90 L180 90 C178 130 150 150 100 150 C50 150 22 130 20 90 Z" fill="var(--ink)"/>
+        <path d="M30 100 L170 100 C166 126 142 140 100 140 C58 140 34 126 30 100 Z" fill="var(--water)" opacity=".75"/>
+        <g fill="var(--leaf)"><circle cx="55" cy="98" r="10"/><circle cx="78" cy="94" r="10"/><circle cx="100" cy="98" r="10"/><circle cx="122" cy="94" r="10"/><circle cx="145" cy="98" r="10"/><circle cx="68" cy="84" r="10"/><circle cx="90" cy="82" r="10"/><circle cx="112" cy="82" r="10"/><circle cx="134" cy="84" r="10"/></g>
+        <path d="M80 175 q20 -6 40 0" stroke="var(--chili)" stroke-width="4" fill="none" stroke-linecap="round" opacity=".45"/>
+        <text x="100" y="40" text-anchor="middle" font-size="17" fill="var(--soft)">많이, 미지근하게</text>
+        <text x="100" y="200" text-anchor="middle" font-size="18" fill="var(--water)">물이 고여서 삶아짐</text>
+      </g>
+      <g>
+        <path class="steam" d="M270 76 q8 -10 0 -20 q-8 -10 0 -20" stroke="var(--soft)" stroke-width="3" fill="none"/>
+        <path class="steam s2" d="M300 76 q8 -10 0 -20 q-8 -10 0 -20" stroke="var(--soft)" stroke-width="3" fill="none"/>
+        <path class="steam s3" d="M330 76 q8 -10 0 -20 q-8 -10 0 -20" stroke="var(--soft)" stroke-width="3" fill="none"/>
+        <path d="M220 90 L380 90 C378 130 350 150 300 150 C250 150 222 130 220 90 Z" fill="var(--ink)"/>
+        <g fill="var(--leaf)"><circle cx="270" cy="98" r="10"/><circle cx="300" cy="102" r="10"/><circle cx="330" cy="98" r="10"/></g>
+        <path d="M250 180 q12 -16 25 0 q13 -16 25 0 q12 -16 25 0 q13 -16 25 0" stroke="var(--chili)" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <text x="300" y="40" text-anchor="middle" font-size="17" fill="var(--soft)">조금씩, 뜨겁게</text>
+        <text x="300" y="200" text-anchor="middle" font-size="18" fill="var(--leaf-dark)">물이 날아가서 볶아짐</text>
+      </g>
+    </svg>
+    <h2>물이 고이면 볶음이 아니라 삶기가 돼요</h2>
+    <p>열이 세포벽을 깨면 안에 있던 물이 흘러나와요. 팬이 이 물을 바로 날리지 못하면 채소가 물에 잠겨 흐물흐물해져요.</p>
+    <ul class="tips">
+      <li><b>1. 팬부터 뜨겁게</b><span>충분히 달군 뒤에 채소를 넣어요</span></li>
+      <li><b>2. 조금씩 넣기</b><span>한꺼번에 넣으면 팬이 식어요</span></li>
+      <li><b>3. 소금은 마지막에</b><span>처음에 넣으면 물이 미리 빠져요</span></li>
+      <li><b>4. 물 많은 채소는 짧게</b><span>애호박, 버섯은 센 불에서 빨리</span></li>
+    </ul>
+  </section>
+
+  <section class="finale">
+    <span class="eyebrow">한 문장 요약</span>
+    <q>채소의 물은 빼거나, 날리거나, 지키거나</q>
+    <p>김치는 빼고, 볶음은 날리고, 샐러드는 지켜요.</p>
+  </section>
+
+  <nav class="pager" aria-label="앞뒤 페이지">
+    <a href="wilting.html"><small>← 이전</small><span>숨이 죽는다는 말</span></a>
+    <a class="next" href="study.html"><small>다음 →</small><span>요리 과학 공부법</span></a>
+  </nav>
+</div>
+</body>
+</html>

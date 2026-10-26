@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>요리 과학 공부법</title>
+<meta name="description" content="두꺼운 요리 과학책 대신 볼 수 있는 무료 영상과 글, 그리고 보는 순서를 정리했어요.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: 100%; }
+.path div { border: 2px solid var(--line); border-radius: 16px; padding: 12px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.path .n { font-family: var(--mono); font-size: .8rem; color: var(--chili); }
+.path b { font-family: var(--display); font-weight: 400; font-size: 1.15rem; line-height: 1.3; }
+.path span { color: var(--soft); font-size: .9rem; line-height: 1.5; }
+@media (max-width: 560px) { .path { grid-template-columns: 1fr; } }
+.channels { list-style: none; margin: 0; padding: 0; width: 100%; text-align: left; border-top: 1px solid var(--line); }
+.channels li { border-bottom: 1px solid var(--line); }
+.channels a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 12px 2px; text-decoration: none; color: var(--ink); }
+.channels a:hover .name { color: var(--chili); }
+.channels .name { font-family: var(--display); font-size: 1.1rem; }
+.channels .lang { font-family: var(--mono); font-size: .75rem; color: var(--soft); align-self: center; white-space: nowrap; }
+.channels .what { grid-column: 1 / -1; color: var(--soft); font-size: .92rem; line-height: 1.5; }
+.howto { counter-reset: s; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; text-align: left; width: 100%; }
+.howto li { counter-increment: s; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; align-items: center; }
+.howto li::before { content: counter(s); font-family: var(--display); width: 32px; height: 32px; border-radius: 50%; background: var(--water); color: var(--paper); display: grid; place-items: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="topnav"><a href="./">← 목차</a><span class="no">04 / 05</span></nav>
+
+  <header class="hero">
+    <span class="eyebrow">책이 어려울 때</span>
+    <h1>요리 과학, <em>영상으로</em> 배워요</h1>
+  </header>
+
+  <section class="page">
+    <span class="step">이 순서로 보면 쉬워요</span>
+    <svg viewBox="0 0 400 120" role="img" aria-label="큰 그림 보기, 궁금한 것 찾아보기, 깊게 읽기 세 단계 계단">
+      <rect x="20" y="80" width="110" height="30" rx="6" fill="var(--leaf)"/>
+      <rect x="145" y="55" width="110" height="55" rx="6" fill="var(--water)"/>
+      <rect x="270" y="25" width="110" height="85" rx="6" fill="var(--chili)"/>
+      <text x="75" y="101" text-anchor="middle" font-size="15" fill="var(--paper)">큰 그림</text>
+      <text x="200" y="88" text-anchor="middle" font-size="15" fill="var(--paper)">궁금한 것</text>
+      <text x="325" y="73" text-anchor="middle" font-size="15" fill="var(--paper)">깊게</text>
+    </svg>
+    <div class="path">
+      <div><span class="n">1단계</span><b>큰 그림 보기</b><span>Salt Fat Acid Heat 다큐 4편. 한국어 자막이 있어요.</span></div>
+      <div><span class="n">2단계</span><b>궁금한 것만 찾기</b><span>Adam Ragusea, Ethan Chlebowski에서 주제를 검색해요.</span></div>
+      <div><span class="n">3단계</span><b>깊게 읽기</b><span>궁금한 주제만 Food Lab 글로 읽어요.</span></div>
+    </div>
+  </section>
+
+  <section class="page">
+    <span class="step">볼 만한 곳</span>
+    <ul class="channels">
+      <li><a href="https://www.netflix.com/search?q=Salt%20Fat%20Acid%20Heat" target="_blank" rel="noopener"><span class="name">Salt Fat Acid Heat (넷플릭스)</span><span class="lang">한국어 자막</span><span class="what">소금, 기름, 신맛, 불. 요리를 4가지로 나눠 설명하는 다큐예요.</span></a></li>
+      <li><a href="https://www.youtube.com/channel/UCRlgVt8b0dSooNqS7XQgfnQ" target="_blank" rel="noopener"><span class="name">즐요랩 (샘표)</span><span class="lang">한국어</span><span class="what">요리 속 과학을 쉽게 설명해요. 어린이용이라 입문에 좋아요.</span></a></li>
+      <li><a href="https://www.youtube.com/@aragusea" target="_blank" rel="noopener"><span class="name">Adam Ragusea</span><span class="lang">영어</span><span class="what">일상 요리의 “왜?”를 짧게 풀어 줘요. 주방 속설 검증이 많아요.</span></a></li>
+      <li><a href="https://www.youtube.com/@EthanChlebowski" target="_blank" rel="noopener"><span class="name">Ethan Chlebowski</span><span class="lang">영어</span><span class="what">집밥 기술의 근거를 실험으로 비교해요.</span></a></li>
+      <li><a href="https://www.youtube.com/@JKenjiLopezAlt" target="_blank" rel="noopener"><span class="name">J. Kenji López-Alt</span><span class="lang">영어</span><span class="what">『더 푸드 랩』 저자의 채널이에요. 요리하면서 이유를 말해 줘요.</span></a></li>
+      <li><a href="https://www.youtube.com/@americastestkitchen" target="_blank" rel="noopener"><span class="name">America's Test Kitchen</span><span class="lang">영어</span><span class="what">레시피를 여러 번 시험하고 왜 이 방법이 나은지 설명해요.</span></a></li>
+      <li><a href="https://www.youtube.com/@ChineseCookingDemystified" target="_blank" rel="noopener"><span class="name">Chinese Cooking Demystified</span><span class="lang">영어</span><span class="what">웍과 센 불 볶음의 원리를 알려 줘요.</span></a></li>
+      <li><a href="https://www.seriouseats.com/the-food-lab-5118015" target="_blank" rel="noopener"><span class="name">Serious Eats · The Food Lab 칼럼</span><span class="lang">영어 글</span><span class="what">책의 원본 칼럼이에요. 주제별로 한 편씩 무료로 읽을 수 있어요.</span></a></li>
+    </ul>
+  </section>
+
+  <section class="page">
+    <span class="step">영어 영상을 한국어로 보기</span>
+    <ol class="howto">
+      <li>유튜브 영상 아래 ⚙ 설정을 눌러요.</li>
+      <li>자막 → 자동 번역을 골라요.</li>
+      <li>한국어를 골라요.</li>
+    </ol>
+  </section>
+
+  <section class="finale">
+    <span class="eyebrow">한 문장 요약</span>
+    <q>큰 그림 먼저, 궁금한 것만 깊게</q>
+  </section>
+
+  <nav class="pager" aria-label="앞뒤 페이지">
+    <a href="vegetable-water.html"><small>← 이전</small><span>채소는 거의 물이에요</span></a>
+    <a class="next" href="foodlab-map.html"><small>다음 →</small><span>푸드랩 지도</span></a>
+  </nav>
+</div>
+</body>
+</html>

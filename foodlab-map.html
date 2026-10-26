@@ -1,6 +1,12 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>푸드랩 무료 지도</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="켄지 로페즈-알트의 무료 영상과 Food Lab 칼럼 중 원리 설명 85개를 주제별로 정리했어요.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
 <style>
 /* Layout: lab notebook — stat strip, starter shelf, then a filterable index of principle-first items */
 :root {
@@ -73,8 +79,11 @@ ul.items a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2p
 .notes a { color: var(--article); }
 @media (max-width: 480px) { .stats { grid-template-columns: 1fr 1fr 1fr; } .stat b { font-size: 1.25rem; } }
 </style>
-
+</head>
+<body>
 <div class="wrap">
+  <nav class="topnav"><a href="./">← 목차</a><span class="no">05 / 05</span></nav>
+
   <header>
     <h1>푸드랩, 책 없이 보기</h1>
     <p class="lede">켄지 로페즈-알트의 유튜브 영상과 Serious Eats 칼럼 목록을 전부 확인했어요. 그중 “왜 이렇게 하나”를 설명하는 것만 골라 주제별로 묶었어요. 모두 무료예요.</p>
@@ -98,6 +107,10 @@ ul.items a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2p
     <div id="list" style="display:flex;flex-direction:column;gap:28px"></div>
   </section>
 
+  <nav class="pager" aria-label="앞뒤 페이지">
+    <a href="study.html"><small>← 이전</small><span>요리 과학 공부법</span></a>
+  </nav>
+
   <footer class="notes">
     <p>영상과 글은 영어예요. 유튜브는 자막 → 자동 번역 → 한국어로 볼 수 있어요.</p>
     <p>한국어 제목과 설명은 원제목을 보고 붙였어요. 영상 내용을 하나하나 보고 쓴 것은 아니에요.</p>
@@ -107,16 +120,16 @@ ul.items a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2p
 
 <script>
 const CATS = {
-  salt:   ["소금·간", "소금을 언제, 얼마나, 어떤 걸 넣는지"],
-  veg:    ["채소·수분", "김치 절이기와 같은 삼투압, 채소 물기 다루기"],
-  stir:   ["볶음·웍", "볶음이 물러지지 않는 법, 센 불의 원리"],
-  crisp:  ["튀김·바삭함", "겉은 바삭, 속은 촉촉의 원리"],
-  meat:   ["고기·스테이크", "굽기, 레스팅, 열과 온도"],
-  egg:    ["달걀", "삶기, 굽기, 스크램블의 차이"],
-  pasta:  ["파스타·소스·유화", "물과 기름이 섞이는 원리"],
-  myth:   ["속설·Q&A", "흔히 믿는 요리 상식 검증"],
-  bake:   ["베이킹·반죽", "반죽, 발효, 부풀리기"],
-  tools:  ["칼질·도구", "칼, 팬, 웍 고르고 쓰기"]
+  salt:   ["소금·간", "5살 버전: 소금은 맛도 내고 물도 끌어내요. 언제 넣느냐에 따라 결과가 달라져요."],
+  veg:    ["채소·수분", "5살 버전: 채소는 물풍선이에요. 물을 빼면 양념이 잘 배고, 지키면 아삭해요."],
+  stir:   ["볶음·웍", "5살 버전: 팬이 뜨거워야 물이 바로 날아가요. 그래야 삶아지지 않고 볶아져요."],
+  crisp:  ["튀김·바삭함", "5살 버전: 겉의 물을 다 날려야 바삭해져요. 물이 남으면 눅눅해요."],
+  meat:   ["고기·스테이크", "5살 버전: 겉은 세게, 속은 천천히 익혀요. 열과 온도는 다른 거예요."],
+  egg:    ["달걀", "5살 버전: 달걀은 온도에 아주 예민해요. 몇 도 차이로 말랑과 딱딱이 갈려요."],
+  pasta:  ["파스타·소스·유화", "5살 버전: 물과 기름은 원래 안 섞여요. 전분과 노른자가 둘을 손잡게 해요."],
+  myth:   ["속설·Q&A", "5살 버전: “원래 그렇게 하는 거야”를 실험으로 확인해요."],
+  bake:   ["베이킹·반죽", "5살 버전: 반죽 속 작은 공기 방울이 커지면서 빵이 부풀어요."],
+  tools:  ["칼질·도구", "5살 버전: 잘 드는 칼과 알맞은 팬이 요리의 절반이에요."]
 };
 // [type v/a, cat, 한국어, 원제, id(영상)/slug(글), 길이]
 const ITEMS = [
@@ -262,3 +275,5 @@ document.getElementById("types").addEventListener("click", e => {
 });
 chips(); render();
 </script>
+</body>
+</html>

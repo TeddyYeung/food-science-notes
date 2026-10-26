@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>부엌 과학 그림책</title>
+<meta name="description" content="김치 절이기부터 볶음까지, 요리 속 과학을 5살도 알게 그림으로 설명해요.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.toc { display: flex; flex-direction: column; gap: 12px; }
+.toc a {
+  display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 14px; align-items: center;
+  background: var(--paper); border: 2px solid var(--line); border-radius: 20px; padding: 12px 16px;
+  text-decoration: none; color: var(--ink);
+}
+.toc a:hover { border-color: var(--leaf); }
+.toc svg { width: 72px; height: 72px; }
+.toc .no { font-family: var(--mono); font-size: .8rem; color: var(--soft); }
+.toc .t { font-family: var(--display); font-size: 1.3rem; line-height: 1.25; display: block; }
+.toc .d { color: var(--soft); font-size: .95rem; display: block; }
+.intro { text-align: center; color: var(--soft); max-width: 32em; margin: 0 auto; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">5살도 아는 요리 과학</span>
+    <h1>부엌은 작은 <em>실험실</em>이에요</h1>
+    <p class="intro">배추에 소금을 뿌리면 왜 물이 나올까? 볶음은 왜 물러질까? 그림으로 하나씩 알아봐요.</p>
+  </header>
+
+  <nav class="toc" aria-label="목차">
+    <a href="osmosis.html">
+      <svg viewBox="0 0 72 72" aria-hidden="true">
+        <path d="M36 8 C18 8 10 24 12 40 C14 56 26 62 36 62 C46 62 58 56 60 40 C62 24 54 8 36 8 Z" fill="var(--leaf)"/>
+        <path d="M36 18 L36 60" stroke="var(--leaf-dark)" stroke-width="3"/>
+        <path d="M24 64 q4 6 0 8 q-4 -2 0 -8 Z M48 64 q4 6 0 8 q-4 -2 0 -8 Z" fill="var(--water)"/>
+      </svg>
+      <span><span class="no">01</span><span class="t">김치 속 삼투압</span><span class="d">소금 뿌린 배추에서 물이 나오는 이유</span></span>
+    </a>
+    <a href="wilting.html">
+      <svg viewBox="0 0 72 72" aria-hidden="true">
+        <circle cx="24" cy="30" r="16" fill="var(--water)"/>
+        <path d="M24 46 L24 60" stroke="var(--soft)" stroke-width="2"/>
+        <path d="M44 52 C44 40 64 40 64 52 C64 58 44 58 44 52 Z" fill="var(--water)" opacity=".55"/>
+        <path d="M54 58 L54 66" stroke="var(--soft)" stroke-width="2"/>
+      </svg>
+      <span><span class="no">02</span><span class="t">숨이 죽는다는 말</span><span class="d">빳빳한 채소가 흐물흐물해지는 이유</span></span>
+    </a>
+    <a href="vegetable-water.html">
+      <svg viewBox="0 0 72 72" aria-hidden="true">
+        <rect x="16" y="12" width="40" height="52" rx="8" fill="none" stroke="var(--soft)" stroke-width="3"/>
+        <rect x="19" y="18" width="34" height="43" rx="5" fill="var(--water)"/>
+        <text x="36" y="46" text-anchor="middle" font-size="16" fill="var(--paper)">95%</text>
+      </svg>
+      <span><span class="no">03</span><span class="t">채소는 거의 물이에요</span><span class="d">물을 언제 빼고, 볶음은 왜 물러지는지</span></span>
+    </a>
+    <a href="study.html">
+      <svg viewBox="0 0 72 72" aria-hidden="true">
+        <rect x="10" y="16" width="52" height="36" rx="8" fill="var(--chili)"/>
+        <path d="M30 26 L46 34 L30 42 Z" fill="var(--paper)"/>
+        <rect x="24" y="56" width="24" height="4" rx="2" fill="var(--soft)"/>
+      </svg>
+      <span><span class="no">04</span><span class="t">요리 과학 공부법</span><span class="d">책 대신 볼 영상과 글, 보는 순서</span></span>
+    </a>
+    <a href="foodlab-map.html">
+      <svg viewBox="0 0 72 72" aria-hidden="true">
+        <rect x="12" y="10" width="48" height="54" rx="6" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/>
+        <path d="M22 24 H50 M22 34 H50 M22 44 H40" stroke="var(--leaf-dark)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span><span class="no">05</span><span class="t">푸드랩 지도</span><span class="d">무료 영상·글 85개를 주제별로 정리</span></span>
+    </a>
+  </nav>
+
+  <footer class="site">
+    <span>만든 사람: <a href="https://teddyyeung.is-a.dev">Teddy Yeung</a></span>
+    <span>공부 기록이에요. 틀린 곳이 있으면 알려 주세요.</span>
+  </footer>
+</div>
+</body>
+</html>
