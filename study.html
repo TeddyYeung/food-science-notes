@@ -21,6 +21,8 @@
 .channels .name { font-family: var(--display); font-size: 1.1rem; }
 .channels .lang { font-family: var(--mono); font-size: .75rem; color: var(--soft); align-self: center; white-space: nowrap; }
 .channels .what { grid-column: 1 / -1; color: var(--soft); font-size: .92rem; line-height: 1.5; }
+.channels .eli { grid-column: 1 / -1; font-size: .9rem; line-height: 1.55; color: var(--ink); background: var(--line); border-radius: 8px; padding: 4px 10px; }
+.channels .eli::before { content: "5살 버전 "; font-family: var(--mono); font-size: .72rem; color: var(--chili); }
 .howto { counter-reset: s; list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; text-align: left; width: 100%; }
 .howto li { counter-increment: s; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; align-items: center; }
 .howto li::before { content: counter(s); font-family: var(--display); width: 32px; height: 32px; border-radius: 50%; background: var(--water); color: var(--paper); display: grid; place-items: center; }
@@ -38,6 +40,7 @@
   <section class="page">
     <span class="step">이 순서로 보면 쉬워요</span>
     <svg viewBox="0 0 400 120" role="img" aria-label="큰 그림 보기, 궁금한 것 찾아보기, 깊게 읽기 세 단계 계단">
+      <title>공부 계단 3단계</title>
       <rect x="20" y="80" width="110" height="30" rx="6" fill="var(--leaf)"/>
       <rect x="145" y="55" width="110" height="55" rx="6" fill="var(--water)"/>
       <rect x="270" y="25" width="110" height="85" rx="6" fill="var(--chili)"/>
@@ -54,20 +57,43 @@
 
   <section class="page">
     <span class="step">볼 만한 곳</span>
+    <svg viewBox="0 0 400 150" role="img" aria-label="3층 도서관. 1층 그림책 다큐, 2층 질문 코너 유튜브, 3층 백과사전 Food Lab 글">
+      <title>요리 과학 도서관 3층</title>
+      <path d="M40 40 L200 8 L360 40Z" fill="var(--soft)"/>
+      <rect x="60" y="40" width="280" height="32" fill="var(--chili)"/>
+      <rect x="60" y="74" width="280" height="32" fill="var(--water)"/>
+      <rect x="60" y="108" width="280" height="32" fill="var(--leaf)"/>
+      <text x="200" y="61" text-anchor="middle" font-size="14" fill="var(--paper)">3층 백과사전 · Food Lab 글</text>
+      <text x="200" y="95" text-anchor="middle" font-size="14" fill="var(--paper)">2층 질문 코너 · 유튜브 채널</text>
+      <text x="200" y="129" text-anchor="middle" font-size="14" fill="var(--paper)">1층 그림책 · 다큐</text>
+    </svg>
     <ul class="channels">
-      <li><a href="https://www.netflix.com/search?q=Salt%20Fat%20Acid%20Heat" target="_blank" rel="noopener"><span class="name">Salt Fat Acid Heat (넷플릭스)</span><span class="lang">한국어 자막</span><span class="what">소금, 기름, 신맛, 불. 요리를 4가지로 나눠 설명하는 다큐예요.</span></a></li>
-      <li><a href="https://www.youtube.com/channel/UCRlgVt8b0dSooNqS7XQgfnQ" target="_blank" rel="noopener"><span class="name">즐요랩 (샘표)</span><span class="lang">한국어</span><span class="what">요리 속 과학을 쉽게 설명해요. 어린이용이라 입문에 좋아요.</span></a></li>
-      <li><a href="https://www.youtube.com/@aragusea" target="_blank" rel="noopener"><span class="name">Adam Ragusea</span><span class="lang">영어</span><span class="what">일상 요리의 “왜?”를 짧게 풀어 줘요. 주방 속설 검증이 많아요.</span></a></li>
-      <li><a href="https://www.youtube.com/@EthanChlebowski" target="_blank" rel="noopener"><span class="name">Ethan Chlebowski</span><span class="lang">영어</span><span class="what">집밥 기술의 근거를 실험으로 비교해요.</span></a></li>
-      <li><a href="https://www.youtube.com/@JKenjiLopezAlt" target="_blank" rel="noopener"><span class="name">J. Kenji López-Alt</span><span class="lang">영어</span><span class="what">『더 푸드 랩』 저자의 채널이에요. 요리하면서 이유를 말해 줘요.</span></a></li>
-      <li><a href="https://www.youtube.com/@americastestkitchen" target="_blank" rel="noopener"><span class="name">America's Test Kitchen</span><span class="lang">영어</span><span class="what">레시피를 여러 번 시험하고 왜 이 방법이 나은지 설명해요.</span></a></li>
-      <li><a href="https://www.youtube.com/@ChineseCookingDemystified" target="_blank" rel="noopener"><span class="name">Chinese Cooking Demystified</span><span class="lang">영어</span><span class="what">웍과 센 불 볶음의 원리를 알려 줘요.</span></a></li>
-      <li><a href="https://www.seriouseats.com/the-food-lab-5118015" target="_blank" rel="noopener"><span class="name">Serious Eats · The Food Lab 칼럼</span><span class="lang">영어 글</span><span class="what">책의 원본 칼럼이에요. 주제별로 한 편씩 무료로 읽을 수 있어요.</span></a></li>
+      <li><a href="https://www.netflix.com/search?q=Salt%20Fat%20Acid%20Heat" target="_blank" rel="noopener"><span class="name">Salt Fat Acid Heat (넷플릭스)</span><span class="lang">한국어 자막</span><span class="what">소금, 기름, 신맛, 불. 요리를 4가지로 나눠 설명하는 다큐예요.</span><span class="eli">요리를 소금, 기름, 신맛, 불이라는 레고 블록 4개로 나눠 봐요.</span></a></li>
+      <li><a href="https://www.youtube.com/channel/UCRlgVt8b0dSooNqS7XQgfnQ" target="_blank" rel="noopener"><span class="name">즐요랩 (샘표)</span><span class="lang">한국어</span><span class="what">요리 속 과학을 쉽게 설명해요. 어린이용이라 입문에 좋아요.</span><span class="eli">부엌을 어린이 과학 실험실로 바꿔 보여 줘요.</span></a></li>
+      <li><a href="https://www.youtube.com/@aragusea" target="_blank" rel="noopener"><span class="name">Adam Ragusea</span><span class="lang">영어</span><span class="what">일상 요리의 “왜?”를 짧게 풀어 줘요. 주방 속설 검증이 많아요.</span><span class="eli">부엌에서 ‘왜?’라고 자꾸 묻는 호기심 많은 친구예요.</span></a></li>
+      <li><a href="https://www.youtube.com/@EthanChlebowski" target="_blank" rel="noopener"><span class="name">Ethan Chlebowski</span><span class="lang">영어</span><span class="what">집밥 기술의 근거를 실험으로 비교해요.</span><span class="eli">두 방법을 나란히 해 보고 누가 이기는지 정하는 심판이에요.</span></a></li>
+      <li><a href="https://www.youtube.com/@JKenjiLopezAlt" target="_blank" rel="noopener"><span class="name">J. Kenji López-Alt</span><span class="lang">영어</span><span class="what">『더 푸드 랩』 저자의 채널이에요. 요리하면서 이유를 말해 줘요.</span><span class="eli">요리하면서 이유를 혼잣말로 다 말해 주는 과학자 요리사예요.</span></a></li>
+      <li><a href="https://www.youtube.com/@americastestkitchen" target="_blank" rel="noopener"><span class="name">America's Test Kitchen</span><span class="lang">영어</span><span class="what">레시피를 여러 번 시험하고 왜 이 방법이 나은지 설명해요.</span><span class="eli">같은 레시피를 여러 번 해 보는 시험 주방이에요.</span></a></li>
+      <li><a href="https://www.youtube.com/@ChineseCookingDemystified" target="_blank" rel="noopener"><span class="name">Chinese Cooking Demystified</span><span class="lang">영어</span><span class="what">웍과 센 불 볶음의 원리를 알려 줘요.</span><span class="eli">웍과 센 불의 비밀을 알려 주는 중국 요리 통역사예요.</span></a></li>
+      <li><a href="https://www.seriouseats.com/the-food-lab-5118015" target="_blank" rel="noopener"><span class="name">Serious Eats · The Food Lab 칼럼</span><span class="lang">영어 글</span><span class="what">책의 원본 칼럼이에요. 주제별로 한 편씩 무료로 읽을 수 있어요.</span><span class="eli">책이 되기 전의 원본 노트예요.</span></a></li>
     </ul>
   </section>
 
   <section class="page">
     <span class="step">영어 영상을 한국어로 보기</span>
+    <svg viewBox="0 0 400 70" role="img" aria-label="설정, 자막, 자동 번역, 한국어 순서로 누르는 흐름">
+      <title>한국어 자막 켜는 순서</title>
+      <rect x="4" y="15" width="78" height="40" rx="10" fill="var(--paper)" stroke="var(--soft)" stroke-width="2"/>
+      <rect x="110" y="15" width="78" height="40" rx="10" fill="var(--paper)" stroke="var(--soft)" stroke-width="2"/>
+      <rect x="216" y="15" width="78" height="40" rx="10" fill="var(--paper)" stroke="var(--soft)" stroke-width="2"/>
+      <rect x="322" y="15" width="74" height="40" rx="10" fill="var(--water)"/>
+      <text x="43" y="40" text-anchor="middle" font-size="14" fill="var(--ink)">⚙ 설정</text>
+      <text x="149" y="40" text-anchor="middle" font-size="14" fill="var(--ink)">자막</text>
+      <text x="255" y="40" text-anchor="middle" font-size="14" fill="var(--ink)">자동 번역</text>
+      <text x="359" y="40" text-anchor="middle" font-size="14" fill="var(--paper)">한국어</text>
+      <path d="M84 35 H100 M190 35 H206 M296 35 H312" stroke="var(--chili)" stroke-width="2.5"/>
+      <path d="M100 30 L108 35 L100 40Z M206 30 L214 35 L206 40Z M312 30 L320 35 L312 40Z" fill="var(--chili)"/>
+    </svg>
     <ol class="howto">
       <li>유튜브 영상 아래 ⚙ 설정을 눌러요.</li>
       <li>자막 → 자동 번역을 골라요.</li>
